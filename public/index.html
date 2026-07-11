@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PedalIndia | Premium Cycle Bike Expeditions</title>
+  <meta name="description" content="Embark on spectacular cycle bike expeditions across India - from the heights of Manali to Leh to the shores of Goa, Rajasthan forts, and Kutch deserts.">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Floating Dynamic Header -->
+  <header class="main-header">
+    <div class="header-container">
+      <div class="logo">
+        <i data-lucide="bike" class="logo-icon"></i>
+        <span>Pedal<span>India</span></span>
+      </div>
+      
+      <!-- Nav tabs wrapper with horizontal scroll arrows -->
+      <div class="header-nav-wrapper">
+        <button class="header-arrow-btn" id="header-prev-btn" aria-label="Previous Trip">
+          <i data-lucide="chevron-left"></i>
+        </button>
+        <nav class="nav-tabs-container" id="expeditions-tabs">
+          <!-- Dynamic tabs will appear here -->
+        </nav>
+        <button class="header-arrow-btn" id="header-next-btn" aria-label="Next Trip">
+          <i data-lucide="chevron-right"></i>
+        </button>
+      </div>
+      
+      <button class="btn btn-primary btn-nav shadow-sm" onclick="scrollToBooking()">Inquire Now</button>
+    </div>
+  </header>
+
+  <!-- Hero & Slider Section -->
+  <main id="expeditions">
+    <!-- Multiple layered backgrounds for cross-fade transition -->
+    <div class="hero-bg-container">
+      <div id="hero-bg-active" class="hero-bg"></div>
+      <div id="hero-bg-next" class="hero-bg next"></div>
+      <div class="hero-overlay"></div>
+    </div>
+
+    <div class="hero-container">
+      <div class="hero-content">
+        <span class="category-badge fade-element">Featured Expedition</span>
+        <h1 id="exp-title" class="fade-element">Manali to Leh</h1>
+        <p id="exp-subtitle" class="lead fade-element">The Ultimate Himalayan Cycling Odyssey</p>
+        <p id="exp-description" class="description fade-element">Conquer the highest motorable passes in the world. Traverse spectacular glacial valleys, ancient monasteries, and high-altitude desert plateaus under the shadows of snow-capped peaks.</p>
+        
+        <!-- Action Buttons -->
+        <div class="hero-actions">
+          <button class="btn btn-accent btn-lg shadow-md" onclick="scrollToBooking()">
+            <span>Book Ride</span>
+            <i data-lucide="arrow-right"></i>
+          </button>
+          
+          <!-- Navigation controls -->
+          <div class="slider-controls">
+            <button class="slider-btn" id="prev-btn" aria-label="Previous Expedition">
+              <i data-lucide="chevron-left"></i>
+            </button>
+            <span class="slider-counter"><span id="current-index">1</span>/<span id="total-count">8</span></span>
+            <button class="slider-btn" id="next-btn" aria-label="Next Expedition">
+              <span>Next</span>
+              <i data-lucide="chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Stats Card -->
+      <div class="stats-card fade-element">
+        <h3>Trip Overview</h3>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-icon-wrapper"><i data-lucide="milestone"></i></div>
+            <div class="stat-info">
+              <span class="stat-label">Distance</span>
+              <span class="stat-val" id="stat-distance">475 km</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon-wrapper"><i data-lucide="calendar-range"></i></div>
+            <div class="stat-info">
+              <span class="stat-label">Duration</span>
+              <span class="stat-val" id="stat-duration">11 Days</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon-wrapper"><i data-lucide="gauge"></i></div>
+            <div class="stat-info">
+              <span class="stat-label">Difficulty</span>
+              <span class="stat-val badge" id="stat-difficulty">Epic</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon-wrapper"><i data-lucide="indian-rupee"></i></div>
+            <div class="stat-info">
+              <span class="stat-label">Price (Ex-VAT)</span>
+              <span class="stat-val highlight" id="stat-price">₹65,000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="upcoming-dates-wrapper">
+          <span class="dates-label"><i data-lucide="calendar"></i> Upcoming Departures:</span>
+          <div id="upcoming-dates" class="dates-tags">
+            <!-- Dynamic dates tag list -->
+          </div>
+        </div>
+
+        <!-- Download Itinerary Section -->
+        <div class="download-itinerary-wrapper">
+          <a id="btn-download-pdf" href="#" download class="btn btn-primary btn-full shadow-sm">
+            <i data-lucide="file-down"></i>
+            <span>Download Itinerary (PDF)</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Section 1: Specialities & Amenities (NEW section before itinerary) -->
+  <section class="amenities-section-wrapper" id="amenities">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-subtitle">What We Offer</span>
+        <h2 class="section-title">Expedition Speciality & Included Amenities</h2>
+      </div>
+      <div class="amenities-layout-grid">
+        <!-- Specialities Card (Left Column) -->
+        <div class="speciality-card fade-element">
+          <h3 class="card-title"><i data-lucide="sparkles"></i> Expedition Speciality</h3>
+          <ul id="specialities-list" class="speciality-list">
+            <!-- Dynamic bullet points -->
+          </ul>
+        </div>
+        <!-- Amenities Grid (Right Column) -->
+        <div class="amenities-grid-container" id="amenities-container">
+          <!-- Dynamic amenities cards -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Itinerary (Full Width) -->
+  <section class="section-container" id="itinerary">
+    <div class="section-header">
+      <span class="section-subtitle">Day by Day</span>
+      <h2 class="section-title">The Route Itinerary</h2>
+    </div>
+    <div class="timeline" id="itinerary-timeline">
+      <!-- Dynamically populated day items -->
+    </div>
+  </section>
+
+  <!-- Section 3: Photos Gallery -->
+  <section class="gallery-section-wrapper" id="gallery">
+    <div class="section-container">
+      <div class="section-header-slider">
+        <div class="section-header">
+          <span class="section-subtitle">Visual Journey</span>
+          <h2 class="section-title">Photos from Last Trip</h2>
+        </div>
+        <div class="carousel-nav-arrows">
+          <button class="arrow-btn" onclick="slideGallery(-1)" aria-label="Previous image"><i data-lucide="chevron-left"></i></button>
+          <button class="arrow-btn" onclick="slideGallery(1)" aria-label="Next image"><i data-lucide="chevron-right"></i></button>
+        </div>
+      </div>
+      <div class="slider-wrapper">
+        <div class="gallery-scroll-container" id="photo-gallery">
+          <!-- Dynamically populated photo thumbnails -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Testimonials -->
+  <section class="testimonials-section-wrapper" id="testimonials">
+    <div class="section-container">
+      <div class="section-header-slider">
+        <div class="section-header">
+          <span class="section-subtitle">Voices of Riders</span>
+          <h2 class="section-title">Rider Testimonials</h2>
+        </div>
+        <div class="carousel-nav-arrows">
+          <button class="arrow-btn" onclick="slideTestimonial(-1)" aria-label="Previous testimonial"><i data-lucide="chevron-left"></i></button>
+          <button class="arrow-btn" onclick="slideTestimonial(1)" aria-label="Next testimonial"><i data-lucide="chevron-right"></i></button>
+        </div>
+      </div>
+      <div class="slider-wrapper">
+        <div class="testimonial-scroll-container" id="testimonial-container">
+          <!-- Dynamically populated testimonial cards -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking & Contact Form -->
+  <section class="booking-section" id="booking">
+    <div class="booking-container">
+      <div class="booking-info">
+        <h2>Ready for the Ride of a Lifetime?</h2>
+        <p>Book your slot today or talk to our expedition leads to customize a private group tour. Spots on high-altitude trips are strictly limited for acclimatization safety.</p>
+        <div class="contact-details">
+          <div class="contact-item">
+            <i data-lucide="phone"></i>
+            <span>+91 98765 43210</span>
+          </div>
+          <div class="contact-item">
+            <i data-lucide="mail"></i>
+            <span>expeditions@pedalindia.com</span>
+          </div>
+          <div class="contact-item">
+            <i data-lucide="map-pin"></i>
+            <span>Sector 4, HSR Layout, Bengaluru, India</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="booking-form-wrapper">
+        <form id="inquiry-form" onsubmit="handleInquirySubmit(event)">
+          <div class="form-group">
+            <label for="form-name">Full Name</label>
+            <input type="text" id="form-name" required placeholder="Enter your full name">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="form-email">Email Address</label>
+              <input type="email" id="form-email" required placeholder="name@email.com">
+            </div>
+            <div class="form-group">
+              <label for="form-phone">Phone Number</label>
+              <input type="tel" id="form-phone" required placeholder="+91 99999 99999">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="form-expedition">Expedition of Interest</label>
+            <select id="form-expedition">
+              <!-- Dynamically populated list of options -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="form-msg">Questions or Custom Requests</label>
+            <textarea id="form-msg" rows="4" placeholder="Tell us about your cycling experience or list any questions..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-accent btn-full">
+            <span>Submit Booking Inquiry</span>
+            <i data-lucide="send"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 PedalIndia Bike Expeditions. Crafted for adventurers.</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Safety Protocols</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal for Photos -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" alt="Enlarged photo">
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
