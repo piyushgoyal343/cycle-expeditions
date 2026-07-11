@@ -2,10 +2,11 @@
   "name": "cycle-expeditions",
   "version": "1.0.0",
   "description": "Cycle bike expeditions in India website in Node.js",
-  "main": "src/server.ts",
+  "main": "dist/server.js",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
-    "start": "tsx src/server.ts"
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "tsx watch src/server.ts"
   },
   "dependencies": {
     "express": "^4.19.2"
