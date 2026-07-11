@@ -1240,6 +1240,26 @@ main {
 }
 
 @media (max-width: 768px) {
+  .logo {
+    white-space: nowrap;
+    font-size: 1.35rem;
+  }
+  .header-container {
+    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+  }
+  .header-nav-wrapper {
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+  }
+  main {
+    padding-top: 155px; /* Offset the taller stacked header on mobile */
+  }
   .hero-content h1 {
     font-size: 3rem;
   }
